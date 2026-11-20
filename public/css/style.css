@@ -1,0 +1,16 @@
+body{
+    background-color: rgb(199, 139, 127);
+}
+
+img{
+    width: 400px;
+    height: 280px;
+}
+
+.photo-table{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12%;
+}
