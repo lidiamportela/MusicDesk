@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
     public function allUsers() {
         $searchPar = request()->query('search') ? request()->query('search') : null;
 
@@ -33,7 +34,7 @@ class UserController extends Controller
 
      public function storeUser(Request $request) {
 
-        //dd($request->all);
+        // dd($request->all());
 
         //validar os dados no servidor
         $request->validate([

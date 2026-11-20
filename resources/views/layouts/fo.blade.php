@@ -57,6 +57,10 @@
                                 Olá, {{ Auth::user()->name }}
                             </span>
 
+                            <a href="{{ route('dashboard.home') }}" class="btn btn-primary">
+                                Dashboard
+                            </a>
+
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-warning">

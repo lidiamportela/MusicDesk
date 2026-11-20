@@ -1,9 +1,11 @@
-
 @extends('layouts.fo')
 
 @section('content')
 
-    <h1>Aqui vamos carregar todos os utilizadores</h1>
+    <h1>Lista de utilizadores</h1>
+    <a href="{{ route('users.add') }}" class="btn btn-primary">
+    Adicionar utilizador
+    </a>
 
     @if (session('message'))
         <div class="alert alert-success">

@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 class UtilController extends Controller
 {
     public function loadWelcome() {
-    return view('welcome');
+    return view('home');
     }
+
+     public function loadHomepage()
+    {
+        return view('home');
+    }
+
 }
