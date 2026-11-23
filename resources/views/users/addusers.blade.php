@@ -4,7 +4,7 @@
 
     <h1>Adicionar utilizador</h1>
 
-    <form method="POST" action="{{ route('users.store') }}">
+    <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
@@ -34,6 +34,14 @@
             <p>Password inválida</p>
         @enderror
 
+        <div class="mb-3">
+            <label for="photo" class="form-label">Foto (opcional)</label>
+            <input type="file" name="photo" class="form-control" id="photo" accept="image/*">
+        </div>
+
+    @error('photo')
+        <p>Foto inválida</p>
+    @enderror
         <button type="submit" class="btn btn-primary">Registar</button>
     </form>
 

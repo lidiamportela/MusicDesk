@@ -18,7 +18,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
 
             <a class="navbar-brand" href="{{ route('welcome') }}">
@@ -39,13 +39,9 @@
                         <a class="nav-link" href="{{ route('welcome') }}">Home</a>
                     </li>
 
-                    @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('dashboard.home') }}">
-                                BackOffice
-                            </a>
-                        </li>
-                    @endauth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('bands.index-band') }}">Bandas</a>
+                    </li>
 
                 </ul>
 
@@ -57,24 +53,24 @@
                                 Olá, {{ Auth::user()->name }}
                             </span>
 
-                            <a href="{{ route('dashboard.home') }}" class="btn btn-primary">
+                            <a href="{{ route('dashboard.home') }}" class="btn btn-light">
                                 Dashboard
                             </a>
 
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-warning">
+                                <button type="submit" class="btn btn-logout">
                                     Logout
                                 </button>
                             </form>
 
                         @else
-                            <a href="{{ route('login') }}" class="btn btn-outline-primary">
+                            <a href="{{ route('login') }}" class="btn btn-outline-light">
                                 Login
                             </a>
 
                             @if (Route::has('users.add'))
-                                <a href="{{ route('users.add') }}" class="btn btn-primary">
+                                <a href="{{ route('users.add') }}" class="btn btn-light">
                                     Registar
                                 </a>
                             @endif
@@ -88,7 +84,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container mt-5">
         @yield('content')
     </div>
 

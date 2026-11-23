@@ -20,28 +20,25 @@
 
     <h6>Utilizadores da base de dados</h6>
 
-    <table class="table">
+    <table class="table users-table">
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Foto</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
-                @auth
-                    <th></th>
-                    <th></th>
-                @endauth
             </tr>
         </thead>
 
         <tbody>
             @foreach ($users as $user)
                 <tr>
-
-
                     <th scope="row">{{ $user->id }}</th>
+                    <td>
+                        <img src="{{ $user->photo_url }}" alt="{{ $user->name }}" class="photo-table">
+                    </td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-
                 </tr>
             @endforeach
         </tbody>

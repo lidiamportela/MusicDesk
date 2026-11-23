@@ -2,12 +2,11 @@
 
 @section('content')
 
-    <h1>BackOffice</h1>
+    <h1>Dashboard</h1>
 
     <h5>Olá, {{ Auth::user()->name }}</h5>
 
-    @if (Auth::user()->email == 'admin@gmail.com')
-        <div class="alert alert-success" role="alert">
+    @if (Auth::user()->user_type == \App\Models\User::TYPE_ADMIN)        <div class="alert alert-success" role="alert">
             Conta de Administrador
         </div>
     @else
@@ -15,5 +14,9 @@
             Conta de Utilizador
         </div>
     @endif
+
+    <a href="{{ route('users.edit', Auth::id()) }}" class="btn btn-light">
+        Editar perfil
+    </a>
 
 @endsection

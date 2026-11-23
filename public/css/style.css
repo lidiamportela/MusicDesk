@@ -1,5 +1,10 @@
 body{
-    background-color: rgb(199, 139, 127);
+    background-image: url("../images/wallpaper_magnific.com.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #f1f1f1;
 }
 
 img{
@@ -7,10 +12,275 @@ img{
     height: 280px;
 }
 
+
+
+/*** navbar ***/
+.navbar {
+    background-color: rgba(43, 28, 22, 0.452);
+}
+
+.navbar .navbar-brand {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.navbar .nav-link {
+    color: #f1f1f1;
+}
+
+.navbar .nav-link:hover,
+.navbar .navbar-brand:hover {
+    color: #f2b58d;
+}
+
+/* botão "logout" */
+.btn-logout {
+    background-color: #914716;
+    color: #f5e3d6;
+    border: 1px solid #6b2b00;
+}
+
+.btn-logout:hover {
+    background-color: #e5a477;
+    color: #252525;
+    border-color: #e5a477;
+}
+
+
+
+/* homepage */
+.home-page {
+    min-height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-content {
+    background-color: rgba(25, 35, 38, 0.85);
+    padding: 45px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 700px;
+    width: 100%;
+}
+
+.home-content h1 {
+    color: #f2b58d;
+    margin-bottom: 20px;
+}
+
+.home-content p {
+    color: #ffffff;
+    margin-bottom: 25px;
+}
+
+
+
+/* all tables */
+.table,
+.table th,
+.table td {
+    background-color: rgba(25, 35, 38, 0.55);
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+
+
+/***  users ***/
 .photo-table{
-    width: 80px;
-    height: 80px;
+    width: 40px;
+    height: 40px;
     object-fit: cover;
     object-position: center;
     border-radius: 12%;
+}
+
+.users-table th,
+.users-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.form-text {
+    color: #000000;
+    background-color: rgba(192, 190, 190, 0.85);
+}
+
+
+
+/*** bands ***/
+.band-photo {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.album-cover {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.photo-preview {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+
+
+/* botão ad. nova banda/novo álbum */
+.btn-adicionar {
+    background-color: #f2b58d;
+    color: #252525;
+    border: 1px solid #f2b58d;
+}
+
+.btn-adicionar:hover {
+    background-color: #e5a477;
+    color: #252525;
+    border-color: #e5a477;
+}
+
+/* botão editar */
+.btn-editar {
+    background-color: #f2b58d;
+    color: #252525;
+    border: 1px solid #f2b58d;
+}
+
+.btn-editar:hover {
+    background-color: #e5a477;
+    color: #252525;
+}
+
+/* apagar */
+.btn-apagar {
+    background-color: #dc6b75;
+    color: #ffffff;
+    border: 1px solid #dc6b75;
+}
+
+.btn-apagar:hover {
+    background-color: #c6535e;
+    color: #ffffff;
+}
+
+
+
+/* botão ver álbums */
+.btn-albuns {
+    background-color: #e9df8b;
+    color: #252525;
+    border: 1px solid #e9df8b;
+}
+
+.btn-albuns:hover {
+    background-color: #e4d659;
+    color: #252525;
+}
+
+/* botão voltar às bandas */
+.btn-voltar {
+    background-color: #9c8474;
+    color: #ffffff;
+    border: 1px solid #9c8474;
+}
+
+.btn-voltar:hover {
+    background-color: #7c695c;
+    color: #d8d6d0;
+    border-color: #7c695c;
+}
+
+
+
+/*** outros ***/
+
+/* botões "guardar" */
+.btn-guardar {
+    background-color: #f2b58d;
+    color: #252525;
+    border: 1px solid #f2b58d;
+}
+
+.btn-guardar:hover {
+    background-color: #e5a477;
+    color: #252525;
+    border-color: #e5a477;
+}
+
+/* texto do form */
+.form-control{
+    background-color: rgba(25, 35, 38, 0.95);
+    color: #ffffff;
+}
+
+.form-control:focus {
+    background-color: rgba(25, 35, 38, 0.95);
+    color: #ffffff;
+    border-color: #f2b58d;
+    box-shadow: 0 0 0 0.2rem rgba(242, 181, 141, 0.2);
+}
+
+/* campo desativado (email) */
+.form-control:disabled {
+    background-color: rgba(25, 35, 38, 0.65);
+    color: #cccccc;
+    opacity: 1;
+}
+
+/* alert do admin */
+.alert-success {
+    background-color: rgba(143, 211, 255, 0.2);
+    color: #ffffff;
+    border: 1px solid #66a86a;
+}
+
+/* alert do utilizador */
+.alert-info {
+    background-color: rgba(242, 181, 141, 0.2);
+    color: #ffffff;
+    border: 1px solid #f2b58d;
+}
+
+
+
+/* pág fallback */
+.fallback-page {
+    min-height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fallback-content {
+    background-color: rgba(25, 35, 38, 0.85);
+    padding: 45px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 600px;
+    width: 100%;
+}
+
+.fallback-content h1 {
+    font-size: 100px;
+    font-weight: bold;
+    color: #f2b58d;
+    margin-bottom: 10px;
+}
+
+.fallback-content h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.fallback-content p {
+    color: #cccccc;
+    margin-bottom: 25px;
 }

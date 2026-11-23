@@ -38,6 +38,9 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
-        ]);
+            'user_type' => $input['email'] == 'admin@gmail.com'
+                ? User::TYPE_ADMIN
+                : User::TYPE_GENERIC_USER
+            ]);
     }
 }

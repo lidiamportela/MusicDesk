@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -12,7 +14,7 @@ class UserController extends Controller
     public function allUsers() {
         $searchPar = request()->query('search') ? request()->query('search') : null;
 
-        $query = User::select('id', 'name', 'email');
+        $query = User::select('id', 'name', 'email', 'photo');
 
         if ($searchPar) {
             $query->where('name', 'LIKE', "%{$searchPar}%")
@@ -32,7 +34,7 @@ class UserController extends Controller
 
 
 
-     public function storeUser(Request $request) {
+    public function storeUser(Request $request) {
 
         // dd($request->all());
 
@@ -40,18 +42,74 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|max:50',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8',
+            'photo' => 'nullable|image'
         ]);
 
+        //guardar a foto, se existir
+        $photoPath = null;
+
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('users', 'public');
+        }
+
         //depois de validados, inserir na bd
-        User::insert([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'photo' => $photoPath,
+            'user_type' => $request->email == 'admin@gmail.com'
+                    ? User::TYPE_ADMIN
+                    : User::TYPE_GENERIC_USER
         ]);
 
         return redirect()->route('users.all')->with('message', 'utilizador adicionado com sucesso!');
 
+    }
+
+
+
+    public function editUsers($id)
+    {
+        //editar o próprio perfil
+        if (Auth::id() != $id) {
+            abort(403);
+        }
+
+        $user = User::findOrFail($id);
+
+        return view('users.editusers', compact('user'));
+    }
+
+
+
+    public function updateUser(Request $request, $id)
+    {
+        if (Auth::id() != $id) {
+            abort(403);
+        }
+
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|max:50',
+            'photo' => 'nullable|image|max:2048',
+        ]);
+
+        $user->name = $request->name;
+
+        if ($request->hasFile('photo')) {
+            if ($user->photo) {
+                Storage::disk('public')->delete($user->photo);
+            }
+
+            $user->photo = $request->file('photo')->store('users', 'public');
+        }
+
+        $user->save();
+
+        return redirect()->route('users.all')->with('message', 'Perfil atualizado com sucesso!');
     }
 
 
