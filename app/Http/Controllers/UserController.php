@@ -64,7 +64,7 @@ class UserController extends Controller
                     : User::TYPE_GENERIC_USER
         ]);
 
-        return redirect()->route('users.all')->with('message', 'utilizador adicionado com sucesso!');
+        return redirect()->route('login')->with('status', 'Conta criada com sucesso! Já podes entrar.');
 
     }
 

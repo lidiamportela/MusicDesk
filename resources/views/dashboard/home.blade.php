@@ -23,4 +23,10 @@
         Editar perfil
     </a>
 
+    @if (Auth::user()->user_type == \App\Models\User::TYPE_ADMIN)
+        <a href="{{ route('users.all') }}" class="btn btn-light">
+            Ver utilizadores
+        </a>
+    @endif
+
 @endsection
