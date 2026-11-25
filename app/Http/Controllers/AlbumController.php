@@ -13,7 +13,15 @@ class AlbumController extends Controller
 
     public function index(Band $band)
     {
-        $albums = $band->albums;
+        $searchPar = request()->query('search') ? request()->query('search') : null;
+
+        $query = $band->albums();
+
+        if ($searchPar) {
+            $query->where('name', 'LIKE', "%{$searchPar}%");
+        }
+
+        $albums = $query->get();
 
         return view('albums.index-album', compact('band', 'albums'));
     }
@@ -39,6 +47,7 @@ class AlbumController extends Controller
             'name'         => 'required|max:255',
             'release_date' => 'required|date',
             'photo'        => 'nullable|image|max:2048',
+            'preview_url' => 'nullable|url|max:255',
         ]);
 
         $photoPath = null;
@@ -51,9 +60,11 @@ class AlbumController extends Controller
             'name'         => $request->name,
             'release_date' => $request->release_date,
             'photo'        => $photoPath,
+            'preview_url' => $request->preview_url,
         ]);
 
-        return redirect()->route('bands.albums', $band)->with('message', 'Álbum criado com sucesso!');
+        return redirect()->route('bands.albums', $band)
+        ->with('message', 'Álbum criado com sucesso!');
     }
 
 
@@ -69,10 +80,12 @@ class AlbumController extends Controller
             'name'         => 'required|max:255',
             'release_date' => 'required|date',
             'photo'        => 'nullable|image|max:2048',
+            'preview_url' => 'nullable|url|max:255',
         ]);
 
         $album->name = $request->name;
         $album->release_date = $request->release_date;
+        $album->preview_url = $request->preview_url;
 
         if ($request->hasFile('photo')) {
             if ($album->photo) {

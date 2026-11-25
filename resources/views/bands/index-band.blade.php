@@ -16,6 +16,19 @@
      @endauth
 
 
+    <form action="{{ route('bands.index-band') }}" method="GET" class="mb-3">
+        <input
+            type="text"
+            name="search"
+            placeholder="Pesquisar banda..."
+            value="{{ request('search') }}"
+            class="form-control"
+        >
+
+        <button class="btn btn-secondary mt-2" type="submit">Procurar</button>
+    </form>
+
+
     <table class="table table-striped align-middle">
         <thead>
             <tr>
@@ -55,7 +68,13 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4">Ainda não há bandas.</td>
+                    <td colspan="4">
+                        @if (request('search'))
+                            Não foram encontradas bandas.
+                        @else
+                            Ainda não há bandas.
+                        @endif
+                    </td>
                 </tr>
             @endforelse
         </tbody>

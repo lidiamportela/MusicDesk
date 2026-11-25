@@ -3,7 +3,7 @@
 @section('content')
 
     <h1>Lista de utilizadores</h1>
-    <a href="{{ route('users.add') }}" class="btn btn-primary">
+    <a href="{{ route('users.add') }}" class="btn btn-light">
     Adicionar utilizador
     </a>
 
@@ -17,8 +17,6 @@
         <input type="text" name="search">
         <button class="btn btn-secondary" type="submit">Procurar</button>
     </form>
-
-    <h6>Utilizadores da base de dados</h6>
 
     <table class="table users-table">
         <thead>

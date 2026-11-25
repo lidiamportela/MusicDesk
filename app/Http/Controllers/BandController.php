@@ -6,12 +6,22 @@ use App\Models\Band;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Str;
 
 class BandController extends Controller
 {
     public function index()
     {
-        $bands = Band::withCount('albums')->get();
+        $searchPar = request()->query('search') ? request()->query('search') : null;
+
+        $query = Band::withCount('albums');
+
+        if ($searchPar) {
+            $query->where('name', 'LIKE', "%{$searchPar}%");
+        }
+
+        $bands = $query->get();
 
         return view('bands.index-band', compact('bands'));
     }
@@ -99,5 +109,56 @@ class BandController extends Controller
     }
 
 
+    /*** Exports ***/
+    public function exportPdf(Band $band)
+    {
+        $band->load('albums');
+        $pdf = Pdf::loadView('bands.pdf', compact('band'));
+        $filename = Str::slug($band->name) . '-press-kit.pdf';
+
+        return $pdf->download($filename);
+    }
+
+
+    public function exportCsv(Band $band)
+    {
+        $band->load('albums');
+        $filename = Str::slug($band->name) . '-discography.csv';
+
+        return response()->streamDownload(function () use ($band) {
+            $handle = fopen('php://output', 'w');
+            fputcsv($handle, ['Band', 'Album Name', 'Release Date']);
+
+            foreach ($band->albums as $album) {
+                fputcsv($handle, [
+                    $band->name,
+                    $album->name,
+                    $album->release_date,
+                ]);
+            }
+
+            fclose($handle);
+        }, $filename, [
+            'Content-Type' => 'text/csv',
+        ]);
+    }
+
+    
+    public function exportJson(Band $band)
+    {
+        $band->load('albums');
+        $filename = Str::slug($band->name) . '-discography.json';
+
+        return response()->json([
+            'band' => $band->name,
+            'total_albums' => $band->albums->count(),
+            'albums' => $band->albums->map(fn ($album) => [
+                'name' => $album->name,
+                'release_date' => $album->release_date,
+            ]),
+        ], 200, [
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ], JSON_PRETTY_PRINT);
+    }
 
 }

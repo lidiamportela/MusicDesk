@@ -41,6 +41,27 @@
             @enderror
         </div>
 
+        <div class="mb-3">
+            <label for="preview_url" class="form-label">Preview (YouTube ou Spotify)</label>
+
+            <input
+                type="url"
+                name="preview_url"
+                id="preview_url"
+                class="form-control"
+                value="{{ old('preview_url', $album->preview_url) }}"
+                placeholder="https://www.youtube.com/watch?v=..."
+            >
+
+        <div class="form-text">
+            Introduz o endereço de um vídeo, álbum ou faixa.
+        </div>
+
+            @error('preview_url')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
         <button type="submit" class="btn btn-guardar">Guardar</button>
         <a href="{{ route('bands.albums', $album->band_id) }}" class="btn btn-outline-secondary">Cancelar</a>
     </form>
