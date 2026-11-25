@@ -3,7 +3,7 @@
 @section('content')
 
     <h1>Lista de utilizadores</h1>
-    <a href="{{ route('users.add') }}" class="btn btn-light">
+    <a href="{{ route('users.add') }}" class="btn btn-light mb-3">
     Adicionar utilizador
     </a>
 
@@ -13,8 +13,15 @@
         </div>
     @endif
 
-    <form action="{{ route('users.all') }}" method="GET">
-        <input type="text" name="search">
+    <form action="{{ route('users.all') }}" method="GET" class="mb-3 d-flex gap-2">
+        <input
+            type="text"
+            name="search"
+            class="form-control w-25"
+            placeholder="Pesquisar utilizador..."
+            value="{{ request('search') }}"
+        >
+
         <button class="btn btn-secondary" type="submit">Procurar</button>
     </form>
 

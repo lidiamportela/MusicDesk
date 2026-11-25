@@ -42,7 +42,7 @@
     @error('photo')
         <p>Foto inválida</p>
     @enderror
-        <button type="submit" class="btn btn-primary">Registar</button>
+        <button type="submit" class="btn btn-guardar">Registar</button>
     </form>
 
 @endsection
