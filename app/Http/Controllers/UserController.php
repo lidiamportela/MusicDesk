@@ -109,7 +109,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('users.all')->with('message', 'Perfil atualizado com sucesso!');
+        return redirect()->route('dashboard.home')->with('message', 'Perfil atualizado com sucesso!');
     }
 
 

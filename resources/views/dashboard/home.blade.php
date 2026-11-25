@@ -4,6 +4,10 @@
 
     <h1>Dashboard</h1>
 
+    @if (session('message'))
+        <div class="alert alert-success">{{ session('message') }}</div>
+    @endif
+
     <h5>Olá, {{ Auth::user()->name }}</h5>
 
     @if (Auth::user()->user_type == \App\Models\User::TYPE_ADMIN)        <div class="alert alert-success" role="alert">

@@ -3,7 +3,7 @@
 @section('content')
 
     <h1>Login</h1>
-    
+
     @if ($errors->any())
         <div class="alert alert-danger" role="alert">
             @foreach ($errors->all() as $error)
@@ -26,7 +26,7 @@
         </div>
 
         <button type="submit" class="btn btn-light">Entrar</button>
-
+        <p class="form-text">Esqueceu-se da pass? Clique <a href="{{ route('password.request') }}">aqui</a></p>
     </form>
 
 @endsection

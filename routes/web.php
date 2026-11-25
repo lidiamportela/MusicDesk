@@ -25,11 +25,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/users', [UserController::class, 'allUsers'])
         ->name('users.all');
 
-    //rota p/ ver/editar users
-    Route::get('/edit-users/{id}', [UserController::class, 'editUsers'])
-        ->name('users.edit');
-
-
+        
     // Criar bandas
     Route::get('/bands/create', [BandController::class, 'create'])
         ->name('bands.create');
@@ -61,6 +57,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
 //*** Serviços de users auth. ***
 
 Route::middleware('auth')->group(function () {
+
+    //rota p/ ver/editar users
+    Route::get('/edit-users/{id}', [UserController::class, 'editUsers'])
+        ->name('users.edit');
 
     //rota de atualizar users
     Route::put('/update-user/{id}', [UserController::class, 'updateUser'])

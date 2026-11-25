@@ -37,7 +37,7 @@
         </div>
 
         <button type="submit" class="btn btn-guardar">Guardar</button>
-        <a href="{{ route('users.all') }}" class="btn btn-outline-light">Cancelar</a>
+        <a href="{{ route('dashboard.home') }}" class="btn btn-outline-light">Cancelar</a>
     </form>
 
 @endsection
