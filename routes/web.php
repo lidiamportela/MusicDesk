@@ -21,6 +21,15 @@ Route::get('/dashboard', [DashboardController::class, 'home'])
 //*** Serviços de Admin ***
 Route::middleware(['auth', 'admin'])->group(function () {
 
+    //rota p/ ver users
+    Route::get('/users', [UserController::class, 'allUsers'])
+        ->name('users.all');
+
+    //rota p/ ver/editar users
+    Route::get('/edit-users/{id}', [UserController::class, 'editUsers'])
+        ->name('users.edit');
+
+
     // Criar bandas
     Route::get('/bands/create', [BandController::class, 'create'])
         ->name('bands.create');
@@ -53,35 +62,27 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-//rota p/ ver users
-Route::get('/users', [UserController::class, 'allUsers'])
-    ->name('users.all');
-
-//rota p/ ver/editar users
-Route::get('/edit-users/{id}', [UserController::class, 'editUsers'])
-    ->name('users.edit');
-
-//rota de atualizar users
-Route::put('/update-user/{id}', [UserController::class, 'updateUser'])
-    ->name('users.update');
+    //rota de atualizar users
+    Route::put('/update-user/{id}', [UserController::class, 'updateUser'])
+        ->name('users.update');
 
 
-//rota p/ editar bandas (pág de edição)
-Route::get('/bands/{band}/edit', [BandController::class, 'edit'])
-    ->name('bands.edit');
+    //rota p/ editar bandas (pág de edição)
+    Route::get('/bands/{band}/edit', [BandController::class, 'edit'])
+        ->name('bands.edit');
 
-//rota p/ atualizar bandas
-Route::put('/bands/{band}', [BandController::class, 'update'])
-    ->name('bands.update');
+    //rota p/ atualizar bandas
+    Route::put('/bands/{band}', [BandController::class, 'update'])
+        ->name('bands.update');
 
 
-//rota p/ editar álbum
-Route::get('/albums/{album}/edit', [AlbumController::class, 'edit'])
-    ->name('albums.edit');
+    //rota p/ editar álbum
+    Route::get('/albums/{album}/edit', [AlbumController::class, 'edit'])
+        ->name('albums.edit');
 
-//rota p/ atualizar álbum
-Route::put('/albums/{album}', [AlbumController::class, 'update'])
-    ->name('albums.update');
+    //rota p/ atualizar álbum
+    Route::put('/albums/{album}', [AlbumController::class, 'update'])
+        ->name('albums.update');
 });
 
 

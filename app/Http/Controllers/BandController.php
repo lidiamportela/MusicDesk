@@ -143,7 +143,7 @@ class BandController extends Controller
         ]);
     }
 
-    
+
     public function exportJson(Band $band)
     {
         $band->load('albums');

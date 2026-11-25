@@ -17,7 +17,8 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
          if (!$request->user() || $request->user()->user_type != User::TYPE_ADMIN) {
-            abort(403);
+            return redirect('/')
+                ->with('error', 'Acesso negado. Esta área é reservada a administradores.');
         }
 
         return $next($request);
